@@ -11,6 +11,8 @@ Plugin 'victorze/foo'
 Plugin 'cormacrelf/vim-colors-github'
 Plugin 'scrooloose/nerdtree'
 Plugin 'neoclide/coc.nvim', {'branch':'release'}
+Plugin 'stephpy/vim-php-cs-fixer'
+Plugin 'StanAngeloff/php.vim'
 
 Plugin 'leafgarland/typescript-vim'
 Plugin 'tasn/vim-tsx'
@@ -19,7 +21,6 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'HerringtonDarkholme/yats.vim' " TS Syntax
 Plugin 'rakr/vim-one'
-
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -39,6 +40,7 @@ noremap <S-t> :tabnew <CR>
 noremap <silent><S-Left> :tabprevious<CR>
 noremap <silent><S-Right> :tabnext<CR>
 noremap <C-n> :NERDTreeToggle<CR>
+autocmd BufWritePost *.php silent! call PhpCsFixerFixFile()
 
 let g:NERDTreeDirArrowExpandable = '▸'
 let g:NERDTreeDirArrowCollapsible = '▾'
@@ -69,3 +71,10 @@ if (empty($TMUX))
     set termguicolors
   endif
 endif
+
+"set t_8b=^[[48;2;%lu;%lu;%lum
+"set t_8f=^[[38;2;%lu;%lu;%lum
+
+set termguicolors
+let &t_8f = "\e[38;2;%lu;%lu;%lum"
+let &t_8b = "\e[48;2;%lu;%lu;%lum"
